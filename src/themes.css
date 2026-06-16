@@ -1,0 +1,348 @@
+/*
+ * Alternative looks, layered on top of index.css via a [data-theme] attribute
+ * on the component-owned .rrule-root wrapper (not <html>, so an embed can't
+ * clobber the host). The default (no attribute) is "Midnight" — the dark UI.
+ *
+ * Each theme overrides the structural custom properties declared in :root
+ * (fonts, radius, borders, shadow, density) plus a few targeted rules where a
+ * variable isn't enough — four genuinely different aesthetics, not one layout
+ * recolored four ways. Switch between them via the in-app theme picker
+ * (ThemeSwitcher) or a `?theme=` URL param.
+ */
+
+/* =========================================================================
+ * PAPER — light editorial / print. Serif headings, hairline rules, oxblood
+ * accent, airy spacing. Reads like documentation rather than an app.
+ * ========================================================================= */
+.rrule-root[data-theme='paper'] {
+  color-scheme: light;
+
+  --bg: #f6f4ee;
+  --panel: #fffefb;
+  --panel-2: #fbf9f3;
+  --border: #ddd6c7;
+  --text: #211e18;
+  --muted: #837b6b;
+  --accent: #8a2231;
+  --accent-dim: #d8b8bd;
+  --on: #8a2231;
+  --on-text: #fffdf8;
+  --error: #b3261e;
+  --code-bg: #f1ede3;
+  --code-text: #6d2a33;
+
+  --font-head: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-body: var(--font-head);
+  --radius: 3px;
+  --radius-sm: 3px;
+  --border-w: 1px;
+  --shadow: none;
+  --card-pad: 1.1rem 1.4rem 1.4rem;
+  --legend-weight: 700;
+  --legend-spacing: 0.12em;
+  --legend-color: var(--accent);
+  --h1-size: 2.2rem;
+  --h1-weight: 700;
+  --on-weight: 700;
+}
+
+.rrule-root[data-theme='paper'] .app__header {
+  border-bottom: 2px solid var(--text);
+  padding-bottom: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.rrule-root[data-theme='paper'] .card legend {
+  border-bottom: 1px solid var(--accent);
+}
+
+.rrule-root[data-theme='paper'] .preview__text {
+  font-style: italic;
+}
+
+/* =========================================================================
+ * TERMINAL — monospace dev console. Phosphor green on near-black, square
+ * corners, comment-style legends. Maximal "developer tool" energy.
+ * ========================================================================= */
+.rrule-root[data-theme='terminal'] {
+  color-scheme: dark;
+
+  --bg: #05090b;
+  --panel: #0a1014;
+  --panel-2: #0e161b;
+  --border: #1c3328;
+  --text: #c4f5d2;
+  --muted: #5a8268;
+  --accent: #2fe06a;
+  --accent-dim: #14502c;
+  --on: #2fe06a;
+  --on-text: #04140a;
+  --error: #ff5f5f;
+  --code-bg: #040d08;
+  --code-text: #5dff9b;
+
+  --font-head: var(--font-mono);
+  --font-body: var(--font-mono);
+  --radius: 0;
+  --radius-sm: 0;
+  --border-w: 1px;
+  --shadow: none;
+  --card-pad: 0.85rem 1rem 1.1rem;
+  --legend-weight: 700;
+  --legend-spacing: 0.1em;
+  --legend-color: var(--accent);
+  --h1-size: 1.5rem;
+  --h1-weight: 700;
+  --on-weight: 700;
+}
+
+.rrule-root[data-theme='terminal'] .card legend::before {
+  content: '// ';
+}
+
+.rrule-root[data-theme='terminal'] .app__header h1::before {
+  content: '> ';
+  color: var(--accent);
+}
+
+.rrule-root[data-theme='terminal'] .occurrences {
+  font-family: var(--font-mono);
+}
+
+.rrule-root[data-theme='terminal'] .preview__text {
+  text-transform: none;
+}
+
+/* =========================================================================
+ * SOFT — friendly consumer app. Rounded sans, big radii, no hard borders
+ * (depth comes from soft shadows), warm lavender + coral.
+ * ========================================================================= */
+.rrule-root[data-theme='soft'] {
+  color-scheme: light;
+
+  --bg: #f3f0fb;
+  --panel: #ffffff;
+  --panel-2: #f6f3fd;
+  --border: #eae5f6;
+  --text: #2c2840;
+  --muted: #8c86a3;
+  --accent: #e8638a;
+  --accent-dim: #f6c9d8;
+  --on: #e8638a;
+  --on-text: #ffffff;
+  --error: #e0466b;
+  --code-bg: #f4f1fc;
+  --code-text: #7045b8;
+
+  --font-head: ui-rounded, 'SF Pro Rounded', 'Hiragino Maru Gothic ProN',
+    'Quicksand', 'Nunito', system-ui, sans-serif;
+  --font-body: var(--font-head);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --border-w: 1px;
+  --shadow: 0 8px 24px rgba(74, 58, 110, 0.08);
+  --card-pad: 1.25rem 1.4rem 1.5rem;
+  --legend-weight: 800;
+  --legend-spacing: 0.02em;
+  --legend-transform: none;
+  --legend-color: var(--accent);
+  --h1-size: 2rem;
+  --h1-weight: 800;
+  --on-weight: 700;
+}
+
+.rrule-root[data-theme='soft'] .toggle {
+  border-radius: 999px;
+}
+
+.rrule-root[data-theme='soft'] .btn {
+  border-radius: 999px;
+}
+
+.rrule-root[data-theme='soft'] .card legend {
+  font-variant: normal;
+}
+
+/* =========================================================================
+ * NORD — the arctic palette. Cool blue-grey "Polar Night" panels, frost-teal
+ * accent, medium radius. Same layout as Midnight, a beloved different mood.
+ * ========================================================================= */
+.rrule-root[data-theme='nord'] {
+  color-scheme: dark;
+
+  --bg: #2e3440;
+  --panel: #3b4252;
+  --panel-2: #434c5e;
+  --border: #4c566a;
+  --text: #eceff4;
+  --muted: #9aa5b9;
+  --accent: #88c0d0;
+  --accent-dim: #5e81ac;
+  --on: #5e81ac;
+  --on-text: #eceff4;
+  --error: #bf616a;
+  --code-bg: #2b303b;
+  --code-text: #8fbcbb;
+
+  --radius: 8px;
+  --radius-sm: 6px;
+  --legend-spacing: 0.08em;
+}
+
+/* =========================================================================
+ * GLASS — frosted translucent panels over a gradient. Decorative; depth from
+ * blur + soft shadow rather than borders. Violet/cyan accent.
+ * ========================================================================= */
+.rrule-root[data-theme='glass'] {
+  color-scheme: dark;
+
+  --bg: #1a1530;
+  --panel: rgba(255, 255, 255, 0.08);
+  --panel-2: rgba(255, 255, 255, 0.13);
+  --border: rgba(255, 255, 255, 0.18);
+  --text: #f3f1ff;
+  --muted: #c2c0e0;
+  --accent: #a78bfa;
+  --accent-dim: #6d5db8;
+  --on: rgba(167, 139, 250, 0.85);
+  --on-text: #1a1530;
+  --error: #fda4af;
+  --code-bg: rgba(0, 0, 0, 0.3);
+  --code-text: #d6c8ff;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+  --legend-color: var(--accent);
+}
+
+.rrule-root[data-theme='glass'] {
+  background: radial-gradient(circle at 15% 0%, #5b3a8e 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, #2563918a 0%, transparent 40%),
+    linear-gradient(160deg, #1a1530 0%, #241a44 60%, #0f1430 100%);
+  background-attachment: fixed;
+}
+
+.rrule-root[data-theme='glass'] .card,
+.rrule-root[data-theme='glass'] .preview,
+.rrule-root[data-theme='glass'] .presets,
+.rrule-root[data-theme='glass'] .theme-switcher {
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+}
+
+/* =========================================================================
+ * SEPIA — warm low-blue reading theme. Cream paper, brown ink, sienna accent,
+ * serif throughout, gentle shadows. Cozy companion to Paper.
+ * ========================================================================= */
+.rrule-root[data-theme='sepia'] {
+  color-scheme: light;
+
+  --bg: #f3ead6;
+  --panel: #faf3e2;
+  --panel-2: #f1e6cd;
+  --border: #ddcaa4;
+  --text: #44351f;
+  --muted: #8c7a57;
+  --accent: #a8531d;
+  --accent-dim: #ddc196;
+  --on: #a8531d;
+  --on-text: #faf3e2;
+  --error: #9a3412;
+  --code-bg: #ece0c4;
+  --code-text: #6b471c;
+
+  --font-head: 'Charter', 'Georgia', 'Times New Roman', serif;
+  --font-body: var(--font-head);
+  --radius: 6px;
+  --radius-sm: 5px;
+  --shadow: 0 2px 10px rgba(90, 64, 20, 0.08);
+  --legend-transform: none;
+  --legend-weight: 700;
+  --legend-spacing: 0.01em;
+  --legend-color: var(--accent);
+  --h1-size: 2.1rem;
+}
+
+/* =========================================================================
+ * BRUTALIST — stark white, heavy black rules, hard offset shadows, no radius,
+ * oversized grotesk type. Loud and deliberate.
+ * ========================================================================= */
+.rrule-root[data-theme='brutalist'] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --panel-2: #ffffff;
+  --border: #111111;
+  --text: #111111;
+  --muted: #555555;
+  --accent: #1f1fff;
+  --accent-dim: #b9b9ff;
+  --on: #111111;
+  --on-text: #ffffff;
+  --error: #d40000;
+  --code-bg: #f0f0f0;
+  --code-text: #111111;
+
+  --font-head: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Helvetica Neue', Arial, sans-serif;
+  --radius: 0;
+  --radius-sm: 0;
+  --border-w: 2px;
+  --shadow: 5px 5px 0 #111111;
+  --legend-weight: 800;
+  --legend-spacing: 0.04em;
+  --legend-color: var(--text);
+  --h1-size: 2.6rem;
+  --h1-weight: 900;
+  --on-weight: 800;
+}
+
+.rrule-root[data-theme='brutalist'] .toggle--on {
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+/* =========================================================================
+ * HIGH CONTRAST — accessibility-first. Pure black on white, heavy weights,
+ * thick borders, bold focus rings. Maximum legibility.
+ * ========================================================================= */
+.rrule-root[data-theme='contrast'] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --panel-2: #ffffff;
+  --border: #000000;
+  --text: #000000;
+  --muted: #333333;
+  --accent: #0033cc;
+  --accent-dim: #99aadd;
+  --on: #0033cc;
+  --on-text: #ffffff;
+  --error: #b00000;
+  --code-bg: #f2f2f2;
+  --code-text: #000000;
+
+  --radius: 4px;
+  --radius-sm: 4px;
+  --border-w: 2px;
+  --shadow: none;
+  --legend-weight: 800;
+  --legend-color: #000000;
+  --h1-weight: 800;
+  --on-weight: 800;
+}
+
+.rrule-root[data-theme='contrast'] :focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.rrule-root[data-theme='contrast'] .text-input,
+.rrule-root[data-theme='contrast'] .select,
+.rrule-root[data-theme='contrast'] .field__label,
+.rrule-root[data-theme='contrast'] .radio,
+.rrule-root[data-theme='contrast'] .switch {
+  font-size: 1rem;
+}

@@ -1,0 +1,430 @@
+.rrule-root {
+  --bg: #0f1419;
+  --panel: #1a212b;
+  --panel-2: #222b38;
+  --border: #2d3848;
+  --text: #e6edf3;
+  --muted: #8b97a7;
+  --accent: #4c9aff;
+  --accent-dim: #2a5a99;
+  --on: #2563eb;
+  --on-text: #fff;
+  --error: #ff6b6b;
+  --code-bg: #11161d;
+  --code-text: #9ad4ff;
+
+  /* Structural knobs that themes override */
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-head: var(--font-body);
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --radius: 10px;
+  --radius-sm: 7px;
+  --border-w: 1px;
+  --shadow: none;
+  --card-pad: 1rem 1.25rem 1.25rem;
+  --legend-weight: 600;
+  --legend-size: 0.8rem;
+  --legend-spacing: 0.06em;
+  --legend-transform: uppercase;
+  --legend-color: var(--accent);
+  --h1-size: 1.75rem;
+  --h1-weight: 700;
+  --on-weight: 600;
+
+  font-family: var(--font-body);
+  color-scheme: dark;
+
+  /* These lived on <body>; scoped to the wrapper so the app paints its own
+     container and an embed can't restyle the host page. min-height keeps the
+     themed background filling the viewport in the standalone demo. */
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.rrule-root,
+.rrule-root *,
+.rrule-root *::before,
+.rrule-root *::after {
+  box-sizing: border-box;
+}
+
+.rrule-root code {
+  font-family: var(--font-mono);
+  background: var(--code-bg);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.app {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.app__header h1 {
+  margin: 0 0 0.25rem;
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  font-family: var(--font-head);
+}
+
+.app__sub {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* ---------- Presets ---------- */
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--panel);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.presets__label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-right: 0.25rem;
+}
+
+/* ---------- Layout ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.config {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* ---------- Cards / fieldsets ---------- */
+.card {
+  background: var(--panel);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+  margin: 0;
+  box-shadow: var(--shadow);
+}
+
+.card legend {
+  font-weight: var(--legend-weight);
+  font-size: var(--legend-size);
+  letter-spacing: var(--legend-spacing);
+  text-transform: var(--legend-transform);
+  color: var(--legend-color);
+  font-family: var(--font-head);
+  padding: 0 0.4rem;
+}
+
+.card__note {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem 1rem;
+}
+
+/* ---------- Fields ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.field__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field__hint {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.text-input,
+.select {
+  background: var(--panel-2);
+  border: var(--border-w) solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.6rem;
+  font-size: 0.9rem;
+  width: 100%;
+  font-family: inherit;
+}
+
+.text-input:focus,
+.select:focus {
+  outline: 2px solid var(--accent-dim);
+  border-color: var(--accent);
+}
+
+.text-input--inline {
+  width: 5.5rem;
+  display: inline-block;
+  margin: 0 0.4rem;
+}
+
+.text-input:disabled {
+  opacity: 0.45;
+}
+
+/* ---------- Toggle buttons ---------- */
+.toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.toggle {
+  background: var(--panel-2);
+  border: var(--border-w) solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.toggle:hover {
+  border-color: var(--accent);
+}
+
+.toggle--on {
+  background: var(--on);
+  border-color: var(--on);
+  color: var(--on-text);
+  font-weight: var(--on-weight);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  background: var(--panel-2);
+  border: var(--border-w) solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.btn--small {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.btn--ghost {
+  background: transparent;
+}
+
+/* ---------- End modes ---------- */
+.end-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.switch input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--on);
+  cursor: pointer;
+}
+
+/* ---------- Weekday picker ---------- */
+.weekday-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.ordinal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.ordinal-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ordinal-row .select {
+  width: auto;
+}
+
+/* ---------- Preview ---------- */
+.preview-pane {
+  position: sticky;
+  top: 1rem;
+}
+
+.preview {
+  background: var(--panel);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.preview__block h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-family: var(--font-head);
+}
+
+.preview__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview__text {
+  margin: 0;
+  text-transform: capitalize;
+  color: var(--accent);
+}
+
+.preview__code {
+  margin: 0;
+  background: var(--code-bg);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--code-text);
+}
+
+.preview__muted {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.78rem;
+}
+
+.preview__error {
+  color: var(--error);
+  font-size: 0.9rem;
+}
+
+.occurrences {
+  margin: 0;
+  padding-left: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Footer ---------- */
+.app__footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.app__footer a {
+  color: var(--accent);
+}
+
+/* ---------- Theme switcher ---------- */
+.theme-switcher {
+  position: fixed;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.5rem;
+  background: var(--panel);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow), 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+
+.theme-switcher__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: var(--font-head);
+}
+
+.theme-switcher__select {
+  width: auto;
+  padding: 0.3rem 1.6rem 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}

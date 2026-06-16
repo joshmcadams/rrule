@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Build/TS cache
+*.tsbuildinfo
+
+# Vite dev server artifacts
+.vite.log
+.vite.pid
+
+# Local Claude settings
+.claude/settings.local.json
